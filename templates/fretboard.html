@@ -1,19 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>FastAPI Homepage</title>
+    <title>FastAPI Fetch Example with Input</title>
 </head>
 <body>
-    <h1>Welcome to FastAPI Homepage</h1>
-    <p>Keys forwarded to this page:</p>
-    <ul>
-        {% if keys %}
-            {% for key in keys %}
-                <li>{{ key }}</li>
-            {% endfor %}
-        {% else %}
-            <li>No keys forwarded</li>
-        {% endif %}
-    </ul>
+    <h1>FastAPI + Fetch Example</h1>
+
+    <input type="text" id="tuningInput" placeholder="Enter Tuning" />
+    <button id="fetchButton">Send API Request</button>
+
+    <p><strong>Response:</strong> <span id="responseText">No request sent yet.</span></p>
+
+    <script src="/static/script.js"></script>
 </body>
 </html>

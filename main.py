@@ -1,11 +1,11 @@
-from fastapi import FastAPI, APIRouter, Request
-from fastapi.responses import HTMLResponse
+from fastapi import FastAPI, Request, Query
+from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 import hashlib
 
 app = FastAPI()
-router = APIRouter()
+app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
 
 NOTES = "A A# B C C# D D# E F F# G G#".split()
@@ -29,7 +29,7 @@ def tuning_selector(tuning: str, number_of_frets: int = 15):
 # Keep selected notes in memory (simplified — not thread safe)
 selected_notes = []
 
-@router.get("/")
+@app.get("/", response_class=HTMLResponse)
 async def home_page(request: Request):
     return templates.TemplateResponse("fretboard.html", {
         "request": request,
@@ -39,5 +39,7 @@ async def home_page(request: Request):
 
     })
 
-app.include_router(router=router)
+@app.get("/api/get_tuning")
+async def get_data(tuning: str = Query(..., description="Tuning")):
+    return JSONResponse({"tuning": tuning_selector(tuning=tuning)})
 
