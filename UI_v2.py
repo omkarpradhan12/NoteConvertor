@@ -1,7 +1,5 @@
 import streamlit as st
 import pandas as pd
-import hashlib
-from streamlit_extras.stylable_container import stylable_container
 
 NOTES = "A A# B C C# D D# E F F# G G#".split()
 
@@ -29,9 +27,7 @@ def add_note(note: str):
 def clear_notes():
     st.session_state.selected_notes = []
 
-
-# ---
-## Corrected Layout with Styling
+# Layout
 col1, col2 = st.columns([2, 1])
 
 with col1:
@@ -53,14 +49,10 @@ with col1:
             note = df.iloc[fret, j]
             label = str(fret)
 
+            if cols[j].button(label, key=f"button_{note}_{fret}_{j}"):
+                add_note(note)
 
-            with stylable_container(key=f"container_{fret}_{j}"):
-                if cols[j].button(label, key=f"button_{note}_{fret}_{j}"):
-                    add_note(note)
-
-# ---
-st.title('Guitar to Keyboard Lite')
-## Selected Notes Display
+# Selected Notes Display
 with col2:
     st.write("### Selected Notes ")
     if st.session_state.selected_notes:
@@ -75,4 +67,4 @@ with col2:
 
     if st.button("Clear Notes", use_container_width=True):
         clear_notes()
-        st.rerun()
+        st.experimental_rerun()
