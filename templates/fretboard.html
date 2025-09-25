@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FastAPI Homepage</title>
+</head>
+<body>
+    <h1>Welcome to FastAPI Homepage</h1>
+    <p>Keys forwarded to this page:</p>
+    <ul>
+        {% if keys %}
+            {% for key in keys %}
+                <li>{{ key }}</li>
+            {% endfor %}
+        {% else %}
+            <li>No keys forwarded</li>
+        {% endif %}
+    </ul>
+</body>
+</html>
