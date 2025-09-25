@@ -29,12 +29,6 @@ def add_note(note: str):
 def clear_notes():
     st.session_state.selected_notes = []
 
-def color_for_note(note: str) -> str:
-    # Use a consistent, non-numbered note for hashing
-    base_note = ''.join(filter(str.isalpha, note))
-    h = int(hashlib.md5(base_note.encode()).hexdigest(), 16)
-    hue = h % 360
-    return f"hsl({hue}, 70%, 80%)"
 
 # ---
 ## Corrected Layout with Styling
@@ -58,24 +52,14 @@ with col1:
         for j, string in enumerate(df.columns):
             note = df.iloc[fret, j]
             label = str(fret)
-            color = color_for_note(note)
 
-            # Use more specific CSS selector for button
-            css_style = f"""
-                button {{
-                    background-color: {color} !important;
-                    color: black !important;
-                    border-radius: 5px;
-                    padding: 10px;
-                    width: 100%;
-                }}
-            """
 
-            with stylable_container(key=f"container_{fret}_{j}", css_styles=css_style):
+            with stylable_container(key=f"container_{fret}_{j}"):
                 if cols[j].button(label, key=f"button_{note}_{fret}_{j}"):
                     add_note(note)
 
 # ---
+st.title('Guitar to Keyboard Lite')
 ## Selected Notes Display
 with col2:
     st.write("### Selected Notes ")
