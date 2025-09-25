@@ -1,0 +1,7 @@
+streamlit
+pandas
+streamlit-extras
+fastapi
+uvicorn
+jinja2
+python-multipart
