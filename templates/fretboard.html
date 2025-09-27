@@ -1,15 +1,83 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>FastAPI Fetch Example with Input</title>
+    <title>Guitar to Keyboard</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        #main-container {
+            display: flex;
+            gap: 20px; /* space between columns */
+        }
+
+        #fretboard-container {
+            flex: 2; /* larger column */
+        }
+
+        #note-box {
+            flex: 1; /* smaller column */
+            display: flex;
+            flex-direction: column;
+        }
+
+        #note-box textarea {
+            width: 100%;
+            height: 400px;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        td, th {
+            padding: 5px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+
+        button.fret-button {
+            padding: 8px;
+            width: 40px;
+            height: 40px;
+            border: none;
+            cursor: pointer;
+            color: white;
+            font-weight: bold;
+        }
+
+        th {
+            background-color: #333;
+            color: white;
+        }
+    </style>
 </head>
 <body>
-    <h1>FastAPI + Fetch Example</h1>
+    <h1>Guitar to Keyboard</h1>
 
     <input type="text" id="tuningInput" placeholder="Enter Tuning" />
     <button id="fetchButton">Send API Request</button>
 
-    <p><strong>Response:</strong> <span id="responseText">No request sent yet.</span></p>
+    <div id="main-container">
+        <div id="fretboard-container">
+            <table id="fretboard"></table>
+        </div>
+
+        <div id="note-box">
+    <h3>Selected Notes</h3>
+    <textarea id="selectedNotes"></textarea>
+    <button id="clearButton">Clear</button>
+</div>
+    </div>
 
     <script src="/static/script.js"></script>
 </body>
