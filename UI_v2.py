@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 
-NOTES = "A A# B C C# D D# E F F# G G#".split()
+NOTES = "A Bb B C C# D Eb E F F# G Ab".split()
 
 def note_string_builder(string_start: str, number_of_frets: int = 12):
     start_index = NOTES.index(string_start)
